@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { FloatingOrbs } from "@/components/ui/FloatingOrbs";
+import { FloatingOrbs, MatrixRain } from "@/components/ui/FloatingOrbs";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
@@ -13,6 +13,7 @@ const Index = () => {
     <div className="min-h-screen bg-background relative overflow-x-hidden">
       {/* Background Effects */}
       <FloatingOrbs />
+      <MatrixRain />
       
       {/* Navigation */}
       <Navbar />
