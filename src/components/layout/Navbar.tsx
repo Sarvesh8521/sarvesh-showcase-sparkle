@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Terminal } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
@@ -16,12 +16,12 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Experience", href: "#experience" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "home", href: "#home" },
+    { name: "about", href: "#about" },
+    { name: "skills", href: "#skills" },
+    { name: "experience", href: "#experience" },
+    { name: "projects", href: "#projects" },
+    { name: "contact", href: "#contact" },
   ];
 
   const scrollToSection = (href: string) => {
@@ -37,8 +37,8 @@ export const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isScrolled
-          ? "glass-strong py-4"
-          : "bg-transparent py-6"
+          ? "glass-strong py-3"
+          : "bg-transparent py-4"
       )}
     >
       <div className="container max-w-6xl mx-auto px-4">
@@ -50,14 +50,21 @@ export const Navbar = () => {
               e.preventDefault();
               scrollToSection("#home");
             }}
-            className="text-2xl font-display font-bold gradient-text hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2 group"
           >
-            SS
+            <div className="w-8 h-8 rounded border border-primary/50 flex items-center justify-center group-hover:border-primary group-hover:shadow-[0_0_15px_hsl(var(--primary)/0.5)] transition-all">
+              <Terminal className="h-4 w-4 text-primary" />
+            </div>
+            <span className="text-lg font-bold font-mono">
+              <span className="text-primary">S</span>
+              <span className="text-muted-foreground">.</span>
+              <span className="text-foreground">Singh</span>
+            </span>
           </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {navLinks.map((link, index) => (
               <a
                 key={link.name}
                 href={link.href}
@@ -65,9 +72,10 @@ export const Navbar = () => {
                   e.preventDefault();
                   scrollToSection(link.href);
                 }}
-                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-all duration-300"
+                className="px-3 py-2 text-xs font-mono text-muted-foreground hover:text-primary rounded transition-all duration-300 relative group"
               >
-                {link.name}
+                <span className="text-primary/50">[{index}]</span> {link.name}
+                <span className="absolute bottom-0 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-300" />
               </a>
             ))}
           </div>
@@ -76,22 +84,22 @@ export const Navbar = () => {
           <div className="hidden md:block">
             <Button
               size="sm"
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 font-mono text-xs uppercase tracking-wider"
               onClick={() => scrollToSection("#contact")}
             >
-              Hire Me
+              {">"} Hire_Me
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-foreground"
+            className="md:hidden p-2 text-foreground border border-primary/30 rounded"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu className="h-5 w-5" />
             )}
           </button>
         </div>
@@ -103,8 +111,8 @@ export const Navbar = () => {
             isMobileMenuOpen ? "max-h-96 mt-4" : "max-h-0"
           )}
         >
-          <div className="glass rounded-2xl p-4 space-y-2">
-            {navLinks.map((link) => (
+          <div className="glass rounded-lg p-4 space-y-1 neon-border">
+            {navLinks.map((link, index) => (
               <a
                 key={link.name}
                 href={link.href}
@@ -112,16 +120,16 @@ export const Navbar = () => {
                   e.preventDefault();
                   scrollToSection(link.href);
                 }}
-                className="block px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-all duration-300"
+                className="block px-4 py-3 text-sm font-mono text-muted-foreground hover:text-primary hover:bg-primary/10 rounded transition-all duration-300"
               >
-                {link.name}
+                <span className="text-primary/50">[{index}]</span> {link.name}
               </a>
             ))}
             <Button
-              className="w-full mt-4 bg-primary text-primary-foreground hover:bg-primary/90"
+              className="w-full mt-4 bg-primary text-primary-foreground hover:bg-primary/90 font-mono text-xs uppercase"
               onClick={() => scrollToSection("#contact")}
             >
-              Hire Me
+              {">"} Initialize Contact
             </Button>
           </div>
         </div>

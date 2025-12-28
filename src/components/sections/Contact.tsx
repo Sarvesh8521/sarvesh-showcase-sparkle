@@ -2,9 +2,10 @@ import { GlassCard } from "../ui/GlassCard";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { Mail, Phone, MapPin, Send, Linkedin, Github } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Linkedin, Github, MessageSquare } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { Terminal, CodeLine } from "../ui/Terminal";
 
 export const Contact = () => {
   const { toast } = useToast();
@@ -16,47 +17,33 @@ export const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Create mailto link
     const mailtoLink = `mailto:sarvesh8521@gmail.com?subject=Portfolio Contact from ${formData.name}&body=${encodeURIComponent(formData.message)}%0A%0AFrom: ${formData.name}%0AEmail: ${formData.email}`;
     window.location.href = mailtoLink;
     
     toast({
-      title: "Opening email client...",
-      description: "Your default email app will open with the message.",
+      title: "Initializing email client...",
+      description: "Opening your default email application.",
     });
   };
 
   const contactInfo = [
     {
       icon: Mail,
-      label: "Email",
+      label: "email",
       value: "sarvesh8521@gmail.com",
       href: "mailto:sarvesh8521@gmail.com",
     },
     {
       icon: Phone,
-      label: "Phone",
+      label: "phone",
       value: "+91 6204350177",
       href: "tel:+916204350177",
     },
     {
       icon: MapPin,
-      label: "Location",
+      label: "location",
       value: "Delhi, India",
       href: null,
-    },
-  ];
-
-  const socials = [
-    {
-      icon: Linkedin,
-      label: "LinkedIn",
-      href: "https://www.linkedin.com/in/sarvesh-singh-964510173/",
-    },
-    {
-      icon: Github,
-      label: "GitHub",
-      href: "https://github.com/Sarvesh8521",
     },
   ];
 
@@ -65,94 +52,83 @@ export const Contact = () => {
       <div className="container max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 opacity-0 animate-fade-in-up">
-          <span className="text-primary font-medium text-sm tracking-wider uppercase">
-            Get In Touch
-          </span>
-          <h2 className="text-3xl md:text-5xl font-display font-bold mt-4">
-            Let's Work <span className="gradient-text">Together</span>
+          <div className="inline-flex items-center gap-2 text-primary font-mono text-sm mb-4">
+            <MessageSquare className="h-4 w-4" />
+            <span>{"// contact_me"}</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold mt-2">
+            Let's <span className="gradient-text">Connect</span>
           </h2>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            I'm currently looking for new opportunities. Whether you have a question
-            or just want to say hi, I'll try my best to get back to you!
+          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto font-mono text-sm">
+            {"/* Open to opportunities and collaborations */"}
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Info */}
           <div className="space-y-6 opacity-0 animate-fade-in-left delay-200">
-            <GlassCard hover={false} className="space-y-6">
-              <h3 className="text-xl font-display font-semibold">
-                Contact Information
-              </h3>
-
-              <div className="space-y-4">
-                {contactInfo.map((item) => (
-                  <div key={item.label} className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">{item.label}</p>
-                      {item.href ? (
-                        <a
-                          href={item.href}
-                          className="font-medium hover:text-primary transition-colors"
-                        >
-                          {item.value}
-                        </a>
-                      ) : (
-                        <p className="font-medium">{item.value}</p>
-                      )}
-                    </div>
+            <Terminal title="contact_info.sh" className="w-full">
+              <CodeLine prompt="$" command="cat contact_details.json" />
+              <div className="text-muted-foreground mt-2 space-y-1">
+                <span className="text-accent">{"{"}</span>
+                {contactInfo.map((item, i) => (
+                  <div key={item.label} className="pl-4">
+                    <span className="text-muted-foreground">"{item.label}": </span>
+                    {item.href ? (
+                      <a href={item.href} className="text-primary hover:underline">
+                        "{item.value}"
+                      </a>
+                    ) : (
+                      <span className="text-[hsl(var(--cyber-blue))]">"{item.value}"</span>
+                    )}
+                    {i < contactInfo.length - 1 && ","}
                   </div>
                 ))}
+                <span className="text-accent">{"}"}</span>
               </div>
+              
+              <div className="mt-4 pt-4 border-t border-primary/20">
+                <CodeLine prompt="$" command="./check_availability.sh" />
+                <div className="flex items-center gap-2 mt-2 text-primary">
+                  <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                  <span>STATUS: AVAILABLE_FOR_HIRE</span>
+                </div>
+              </div>
+            </Terminal>
 
-              {/* Social Links */}
-              <div className="pt-6 border-t border-border">
-                <p className="text-sm text-muted-foreground mb-4">
-                  Connect with me on social media
-                </p>
-                <div className="flex gap-4">
-                  {socials.map((social) => (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 glass rounded-xl flex items-center justify-center hover:scale-110 hover:border-primary/50 transition-all duration-300 group"
-                    >
-                      <social.icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </GlassCard>
-
-            {/* Availability */}
-            <GlassCard className="opacity-0 animate-fade-in-left delay-300">
-              <div className="flex items-center gap-3">
-                <div className="relative">
-                  <div className="w-3 h-3 bg-green-500 rounded-full" />
-                  <div className="absolute inset-0 w-3 h-3 bg-green-500 rounded-full animate-ping" />
-                </div>
-                <div>
-                  <p className="font-medium">Available for Opportunities</p>
-                  <p className="text-sm text-muted-foreground">
-                    Actively seeking Python/Backend Developer roles
-                  </p>
-                </div>
-              </div>
-            </GlassCard>
+            {/* Social Links */}
+            <div className="flex gap-4">
+              {[
+                { icon: Linkedin, href: "https://www.linkedin.com/in/sarvesh-singh-964510173/", label: "LinkedIn" },
+                { icon: Github, href: "https://github.com/Sarvesh8521", label: "GitHub" },
+                { icon: Mail, href: "mailto:sarvesh8521@gmail.com", label: "Email" },
+              ].map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith("mailto") ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                  className="flex-1 glass p-4 rounded border border-primary/20 hover:border-primary/60 hover:neon-border transition-all duration-300 group flex items-center justify-center gap-2"
+                >
+                  <Icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <span className="text-xs font-mono text-muted-foreground group-hover:text-primary">{label}</span>
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Contact Form */}
           <div className="opacity-0 animate-fade-in-right delay-200">
-            <GlassCard hover={false}>
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <GlassCard hover={false} neon>
+              <div className="font-mono text-sm text-muted-foreground mb-4">
+                <span className="text-accent">{"// "}</span>
+                Send me a message
+              </div>
+              
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">
-                    Your Name
+                  <label htmlFor="name" className="text-xs font-mono text-muted-foreground">
+                    {">"} name:
                   </label>
                   <Input
                     id="name"
@@ -162,13 +138,13 @@ export const Contact = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="bg-secondary/50 border-border focus:border-primary transition-colors"
+                    className="bg-background/50 border-primary/20 focus:border-primary font-mono text-sm"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">
-                    Email Address
+                  <label htmlFor="email" className="text-xs font-mono text-muted-foreground">
+                    {">"} email:
                   </label>
                   <Input
                     id="email"
@@ -179,34 +155,34 @@ export const Contact = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="bg-secondary/50 border-border focus:border-primary transition-colors"
+                    className="bg-background/50 border-primary/20 focus:border-primary font-mono text-sm"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium">
-                    Message
+                  <label htmlFor="message" className="text-xs font-mono text-muted-foreground">
+                    {">"} message:
                   </label>
                   <Textarea
                     id="message"
-                    placeholder="Hi Sarvesh, I'd like to discuss..."
+                    placeholder="Your message here..."
                     required
-                    rows={5}
+                    rows={4}
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
-                    className="bg-secondary/50 border-border focus:border-primary transition-colors resize-none"
+                    className="bg-background/50 border-primary/20 focus:border-primary font-mono text-sm resize-none"
                   />
                 </div>
 
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 glow-primary font-semibold"
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 animate-pulse-glow font-mono uppercase tracking-wider"
                 >
-                  <Send className="mr-2 h-5 w-5" />
-                  Send Message
+                  <Send className="mr-2 h-4 w-4" />
+                  send_message()
                 </Button>
               </form>
             </GlassCard>
