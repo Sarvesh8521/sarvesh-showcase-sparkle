@@ -1,70 +1,53 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
 export const CursorGlow = () => {
-  const glowRef = useRef<HTMLDivElement>(null);
+  const [pos, setPos] = useState({ x: -1000, y: -1000 });
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    let targetX = window.innerWidth / 2;
-    let targetY = window.innerHeight / 2;
-    let x = targetX;
-    let y = targetY;
-    let opacity = 0;
-    let targetOpacity = 0;
     let raf = 0;
-
-    const tick = () => {
-      // Smooth easing toward cursor
-      x += (targetX - x) * 0.18;
-      y += (targetY - y) * 0.18;
-      opacity += (targetOpacity - opacity) * 0.1;
-
-      const el = glowRef.current;
-      if (el) {
-        el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
-        el.style.opacity = String(opacity);
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-
+    let tx = 0, ty = 0;
     const move = (e: MouseEvent) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-      targetOpacity = 1;
-
-      const target = (e.target as HTMLElement)?.closest<HTMLElement>(".card-surface");
-      if (target) {
-        const rect = target.getBoundingClientRect();
-        target.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-        target.style.setProperty("--my", `${e.clientY - rect.top}px`);
+      tx = e.clientX; ty = e.clientY;
+      if (!raf) {
+        raf = requestAnimationFrame(() => {
+          setPos({ x: tx, y: ty });
+          raf = 0;
+        });
       }
+      setVisible(true);
     };
-    const leave = () => { targetOpacity = 0; };
-    const enter = () => { targetOpacity = 1; };
-
-    window.addEventListener("mousemove", move, { passive: true });
-    document.addEventListener("mouseleave", leave);
-    document.addEventListener("mouseenter", enter);
-
+    const leave = () => setVisible(false);
+    const onCardMove = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement)?.closest<HTMLElement>(".card-surface");
+      if (!target) return;
+      const rect = target.getBoundingClientRect();
+      target.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+      target.style.setProperty("--my", `${e.clientY - rect.top}px`);
+    };
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseleave", leave);
+    window.addEventListener("mousemove", onCardMove);
     return () => {
-      cancelAnimationFrame(raf);
       window.removeEventListener("mousemove", move);
-      document.removeEventListener("mouseleave", leave);
-      document.removeEventListener("mouseenter", enter);
+      window.removeEventListener("mouseleave", leave);
+      window.removeEventListener("mousemove", onCardMove);
     };
   }, []);
 
   return (
     <div
-      ref={glowRef}
       aria-hidden
-      className="pointer-events-none fixed top-0 left-0 z-[60] will-change-transform"
+      className="pointer-events-none fixed z-[60] transition-opacity duration-300"
       style={{
+        left: pos.x,
+        top: pos.y,
+        opacity: visible ? 1 : 0,
+        transform: "translate(-50%, -50%)",
         width: 600,
         height: 600,
-        opacity: 0,
         background:
-          "radial-gradient(circle, hsl(var(--primary) / 0.25) 0%, hsl(var(--primary) / 0.08) 28%, transparent 65%)",
+          "radial-gradient(circle, hsl(var(--primary) / 0.22) 0%, hsl(var(--primary) / 0.08) 25%, transparent 65%)",
         filter: "blur(50px)",
         mixBlendMode: "screen",
       }}
