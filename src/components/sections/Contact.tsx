@@ -1,83 +1,126 @@
 import { useState } from "react";
-import { Mail, Phone, MapPin, Send, Github, Linkedin, FileText } from "lucide-react";
+import { ArrowUpRight, FileText, Github, Linkedin, Mail } from "lucide-react";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { supabase } from "@/integrations/supabase/client";
+import { Reveal } from "@/components/ui/Reveal";
+
+const EMAIL = "sarvesh8521@gmail.com";
 
 export const Contact = () => {
   const { toast } = useToast();
   const { settings } = useSiteSettings();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const link = `mailto:sarvesh8521@gmail.com?subject=${encodeURIComponent(
-      `Portfolio Contact — ${form.name}`
-    )}&body=${encodeURIComponent(`${form.message}\n\nFrom: ${form.name}\nEmail: ${form.email}`)}`;
-    window.location.href = link;
-    toast({ title: "Opening your email client…" });
+    setSending(true);
+    const { error } = await supabase.from("contact_messages").insert({
+      name: form.name.trim(),
+      email: form.email.trim(),
+      message: form.message.trim(),
+    });
+    setSending(false);
+    if (error) {
+      toast({ title: "Couldn't send", description: error.message, variant: "destructive" });
+      return;
+    }
+    toast({ title: "Message sent", description: "Thanks — I'll get back to you soon." });
+    setForm({ name: "", email: "", message: "" });
   };
 
-  const resumeHref = settings?.resume_url || "/Sarvesh_Singh_Resume.pdf";
+  const resumeHref = settings?.resume_url || "#";
 
   return (
-    <section id="contact" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-12">
-          <p className="mono text-sm text-muted-foreground mb-2">// let's build something</p>
-          <h2 className="text-3xl md:text-4xl font-bold">Get in touch</h2>
-        </div>
+    <section id="contact" className="py-28 md:py-40">
+      <div className="container-x">
+        <Reveal>
+          <p className="eyebrow mb-8">Contact</p>
+        </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="card-surface p-6 space-y-5" id="resume">
-            <div className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="mono text-sm">STATUS: <span className="accent-text">AVAILABLE_FOR_HIRE</span></span>
-            </div>
+        <div className="grid md:grid-cols-12 gap-10 md:gap-16">
+          <div className="md:col-span-7">
+            <Reveal>
+              <h2 className="text-5xl md:text-7xl leading-[1] tracking-[-0.03em] font-medium">
+                Let's build <span className="serif">something</span> <br /> worth shipping.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-8 text-base md:text-lg text-foreground/70 max-w-xl leading-relaxed">
+                Open to backend, AI and full-time roles starting now. Also up for freelance and collaborations.
+              </p>
+            </Reveal>
 
-            <div className="space-y-3 mono text-sm">
-              <a href="mailto:sarvesh8521@gmail.com" className="flex items-center gap-3 hover:accent-text">
-                <Mail className="h-4 w-4" /> sarvesh8521@gmail.com
-              </a>
-              <a href="tel:+916204350177" className="flex items-center gap-3 hover:accent-text">
-                <Phone className="h-4 w-4" /> +91 6204350177
-              </a>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <MapPin className="h-4 w-4" /> Pune / Delhi, India
+            <Reveal delay={0.15}>
+              <div className="mt-12 space-y-5">
+                <a href={`mailto:${EMAIL}`} className="block group">
+                  <p className="eyebrow mb-1">Email</p>
+                  <p className="text-2xl md:text-3xl link-underline">{EMAIL}</p>
+                </a>
+                <a href="tel:+916204350177" className="block group">
+                  <p className="eyebrow mb-1">Phone</p>
+                  <p className="text-2xl md:text-3xl link-underline">+91 62043 50177</p>
+                </a>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="flex flex-wrap gap-2 pt-2">
-              <a href="https://github.com/Sarvesh8521" target="_blank" rel="noreferrer" className="btn-icon">
-                <Github className="h-4 w-4" /> GitHub
-              </a>
-              <a href="https://www.linkedin.com/in/sarvesh-singh-964510173/" target="_blank" rel="noreferrer" className="btn-icon">
-                <Linkedin className="h-4 w-4" /> LinkedIn
-              </a>
-              <a href={resumeHref} target="_blank" rel="noreferrer" className="btn-primary">
-                <FileText className="h-4 w-4" /> Download Resume
-              </a>
-            </div>
+            <Reveal delay={0.2}>
+              <div className="flex flex-wrap gap-3 mt-12">
+                <a href="https://github.com/Sarvesh8521" target="_blank" rel="noreferrer" className="btn-ghost text-xs">
+                  <Github className="h-4 w-4" /> GitHub <ArrowUpRight className="h-3 w-3" />
+                </a>
+                <a href="https://www.linkedin.com/in/sarvesh-singh-964510173/" target="_blank" rel="noreferrer" className="btn-ghost text-xs">
+                  <Linkedin className="h-4 w-4" /> LinkedIn <ArrowUpRight className="h-3 w-3" />
+                </a>
+                <a href={resumeHref} target="_blank" rel="noreferrer" className="btn-solid text-xs">
+                  <FileText className="h-4 w-4" /> Resume
+                </a>
+              </div>
+            </Reveal>
           </div>
 
-          <form onSubmit={submit} className="card-surface p-6 space-y-4">
-            <div>
-              <label className="mono text-xs text-muted-foreground">{">"} name</label>
-              <Input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="mt-1 bg-background border-border" />
-            </div>
-            <div>
-              <label className="mono text-xs text-muted-foreground">{">"} email</label>
-              <Input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="mt-1 bg-background border-border" />
-            </div>
-            <div>
-              <label className="mono text-xs text-muted-foreground">{">"} message</label>
-              <Textarea rows={5} required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="mt-1 bg-background border-border resize-none" />
-            </div>
-            <button type="submit" className="btn-primary w-full justify-center">
-              <Send className="h-4 w-4" /> send_message()
-            </button>
-          </form>
+          <Reveal delay={0.1} className="md:col-span-5">
+            <form onSubmit={submit} className="space-y-6 md:pl-8 md:border-l md:border-border md:py-2 md:pl-10">
+              <div>
+                <label className="eyebrow block mb-2">Name</label>
+                <Input
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="bg-transparent border-0 border-b border-border rounded-none px-0 focus-visible:ring-0 focus-visible:border-foreground text-base h-11"
+                />
+              </div>
+              <div>
+                <label className="eyebrow block mb-2">Email</label>
+                <Input
+                  required
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="bg-transparent border-0 border-b border-border rounded-none px-0 focus-visible:ring-0 focus-visible:border-foreground text-base h-11"
+                />
+              </div>
+              <div>
+                <label className="eyebrow block mb-2">Message</label>
+                <Textarea
+                  required
+                  rows={5}
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  className="bg-transparent border-0 border-b border-border rounded-none px-0 focus-visible:ring-0 focus-visible:border-foreground text-base resize-none"
+                />
+              </div>
+              <button type="submit" disabled={sending} className="btn-solid w-full justify-center disabled:opacity-60">
+                <Mail className="h-4 w-4" /> {sending ? "Sending…" : "Send message"}
+              </button>
+              <p className="text-xs text-muted-foreground">
+                Messages are delivered directly to Sarvesh.
+              </p>
+            </form>
+          </Reveal>
         </div>
       </div>
     </section>
