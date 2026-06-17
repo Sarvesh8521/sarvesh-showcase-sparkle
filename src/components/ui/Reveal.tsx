@@ -17,7 +17,7 @@ export const Reveal = ({ children, delay = 0, y = 24, className, as = "div" }: P
       initial={reduce ? false : { opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.9, ease: [0.7, 0.05, 0.2, 1], delay }}
+      transition={{ duration: 0.9, ease: [0.7, 0.05, 0.2, 1] as any, delay }}
       className={className}
     >
       {children}

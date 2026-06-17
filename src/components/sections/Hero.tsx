@@ -1,13 +1,13 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowDownRight } from "lucide-react";
 
-const wordStagger = {
+const wordStagger: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
 };
-const wordItem = {
+const wordItem: Variants = {
   hidden: { y: "110%", opacity: 0 },
-  show: { y: "0%", opacity: 1, transition: { duration: 1, ease: [0.7, 0.05, 0.2, 1] } },
+  show: { y: "0%", opacity: 1, transition: { duration: 1, ease: [0.7, 0.05, 0.2, 1] as any } },
 };
 
 export const Hero = () => {
