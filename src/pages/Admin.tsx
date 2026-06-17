@@ -4,8 +4,10 @@ import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { LogOut, Upload, Image as ImageIcon, FileText, Save } from "lucide-react";
+import { LogOut, Upload, Image as ImageIcon, FileText, Save, Mail, Trash2, Check } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
+
+type Message = { id: string; name: string; email: string; message: string; read: boolean; created_at: string };
 
 const Admin = () => {
   const { toast } = useToast();
@@ -25,6 +27,8 @@ const Admin = () => {
   const [profileUrl, setProfileUrl] = useState<string | null>(null);
   const [settingsId, setSettingsId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+
 
   useEffect(() => {
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => {
@@ -44,7 +48,22 @@ const Admin = () => {
     const { data } = await supabase.from("user_roles").select("role").eq("user_id", uid).eq("role", "admin").maybeSingle();
     setIsAdmin(!!data);
     setChecking(false);
-    if (data) loadSettings();
+    if (data) { loadSettings(); loadMessages(); }
+  };
+
+  const loadMessages = async () => {
+    const { data } = await supabase.from("contact_messages").select("*").order("created_at", { ascending: false });
+    if (data) setMessages(data as Message[]);
+  };
+
+  const markRead = async (id: string, read: boolean) => {
+    await supabase.from("contact_messages").update({ read }).eq("id", id);
+    loadMessages();
+  };
+  const deleteMsg = async (id: string) => {
+    if (!confirm("Delete this message?")) return;
+    await supabase.from("contact_messages").delete().eq("id", id);
+    loadMessages();
   };
 
   const loadSettings = async () => {
