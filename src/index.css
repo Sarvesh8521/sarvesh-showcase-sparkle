@@ -126,3 +126,25 @@
   to   { transform: translateX(-50%); }
 }
 .marquee-track { animation: marquee 40s linear infinite; }
+
+/* Admin page compatibility utilities */
+.card-surface {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+}
+.btn-icon {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .5rem 1rem; border-radius: .375rem;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  font-size: .875rem;
+}
+.btn-icon:hover { border-color: hsl(var(--foreground)); }
+.accent-text { color: hsl(var(--foreground)); }
+.grid-bg {
+  background-image:
+    linear-gradient(hsl(var(--border)) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
