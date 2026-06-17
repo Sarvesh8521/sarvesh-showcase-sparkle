@@ -1,8 +1,23 @@
-export const Footer = () => (
-  <footer className="border-t border-border mt-24">
-    <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground mono">
-      <span>© {new Date().getFullYear()} Sarvesh Singh — Built with care.</span>
-      <span>~/portfolio $ <span className="accent-text">end_of_line</span></span>
-    </div>
-  </footer>
-);
+import { useEffect, useState } from "react";
+
+export const Footer = () => {
+  const [time, setTime] = useState("");
+  useEffect(() => {
+    const tick = () => {
+      const t = new Date().toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit" });
+      setTime(`${t} IST`);
+    };
+    tick();
+    const i = setInterval(tick, 30000);
+    return () => clearInterval(i);
+  }, []);
+
+  return (
+    <footer className="hairline mt-32">
+      <div className="container-x py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+        <span>© {new Date().getFullYear()} Sarvesh Singh. Crafted with care.</span>
+        <span className="mono">{time} — Pune, India</span>
+      </div>
+    </footer>
+  );
+};

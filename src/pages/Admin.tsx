@@ -4,8 +4,10 @@ import { useToast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { LogOut, Upload, Image as ImageIcon, FileText, Save } from "lucide-react";
+import { LogOut, Upload, Image as ImageIcon, FileText, Save, Mail, Trash2, Check } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
+
+type Message = { id: string; name: string; email: string; message: string; read: boolean; created_at: string };
 
 const Admin = () => {
   const { toast } = useToast();
@@ -25,6 +27,8 @@ const Admin = () => {
   const [profileUrl, setProfileUrl] = useState<string | null>(null);
   const [settingsId, setSettingsId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+
 
   useEffect(() => {
     const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => {
@@ -44,7 +48,22 @@ const Admin = () => {
     const { data } = await supabase.from("user_roles").select("role").eq("user_id", uid).eq("role", "admin").maybeSingle();
     setIsAdmin(!!data);
     setChecking(false);
-    if (data) loadSettings();
+    if (data) { loadSettings(); loadMessages(); }
+  };
+
+  const loadMessages = async () => {
+    const { data } = await supabase.from("contact_messages").select("*").order("created_at", { ascending: false });
+    if (data) setMessages(data as Message[]);
+  };
+
+  const markRead = async (id: string, read: boolean) => {
+    await supabase.from("contact_messages").update({ read }).eq("id", id);
+    loadMessages();
+  };
+  const deleteMsg = async (id: string) => {
+    if (!confirm("Delete this message?")) return;
+    await supabase.from("contact_messages").delete().eq("id", id);
+    loadMessages();
   };
 
   const loadSettings = async () => {
@@ -187,6 +206,33 @@ const Admin = () => {
           <h2 className="font-semibold">Bio</h2>
           <Textarea rows={6} value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Short bio shown on the homepage…" />
           <Button onClick={saveBio} disabled={saving}><Save className="h-4 w-4 mr-2" /> {saving ? "Saving…" : "Save bio"}</Button>
+        </section>
+
+        <section className="card-surface p-6 space-y-4">
+          <h2 className="font-semibold flex items-center gap-2"><Mail className="h-4 w-4 accent-text" /> Contact messages ({messages.filter(m => !m.read).length} unread)</h2>
+          {messages.length === 0 && <p className="text-sm text-muted-foreground">No messages yet.</p>}
+          <ul className="divide-y divide-border">
+            {messages.map((m) => (
+              <li key={m.id} className={`py-4 space-y-2 ${m.read ? "opacity-60" : ""}`}>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="font-medium">{m.name} <span className="text-xs text-muted-foreground">&lt;{m.email}&gt;</span></p>
+                    <p className="text-[11px] mono text-muted-foreground">{new Date(m.created_at).toLocaleString()}</p>
+                  </div>
+                  <div className="flex gap-1 shrink-0">
+                    <Button size="sm" variant="outline" onClick={() => markRead(m.id, !m.read)} title={m.read ? "Mark unread" : "Mark read"}>
+                      <Check className="h-3 w-3" />
+                    </Button>
+                    <Button size="sm" variant="outline" onClick={() => deleteMsg(m.id)} title="Delete">
+                      <Trash2 className="h-3 w-3" />
+                    </Button>
+                  </div>
+                </div>
+                <p className="text-sm whitespace-pre-wrap text-foreground/85">{m.message}</p>
+                <a href={`mailto:${m.email}?subject=Re: portfolio`} className="mono text-xs accent-text underline">Reply →</a>
+              </li>
+            ))}
+          </ul>
         </section>
       </div>
     </div>
