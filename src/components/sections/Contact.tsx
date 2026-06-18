@@ -85,8 +85,8 @@ export const Contact = () => {
               <label className="mono text-xs text-muted-foreground">{">"} message</label>
               <Textarea rows={5} required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="mt-1 bg-background border-border resize-none" />
             </div>
-            <button type="submit" className="btn-primary w-full justify-center">
-              <Send className="h-4 w-4" /> send_message()
+            <button type="submit" disabled={sending} className="btn-primary w-full justify-center disabled:opacity-60">
+              <Send className="h-4 w-4" /> {sending ? "sending..." : "send_message()"}
             </button>
           </form>
         </div>
