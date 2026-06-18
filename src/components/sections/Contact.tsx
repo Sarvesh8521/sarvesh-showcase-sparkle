@@ -4,19 +4,30 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Contact = () => {
   const { toast } = useToast();
   const { settings } = useSiteSettings();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const link = `mailto:sarvesh8521@gmail.com?subject=${encodeURIComponent(
-      `Portfolio Contact — ${form.name}`
-    )}&body=${encodeURIComponent(`${form.message}\n\nFrom: ${form.name}\nEmail: ${form.email}`)}`;
-    window.location.href = link;
-    toast({ title: "Opening your email client…" });
+    setSending(true);
+    const { error } = await supabase.from("contact_messages").insert({
+      name: form.name.trim(),
+      email: form.email.trim(),
+      message: form.message.trim(),
+      read: false,
+    });
+    setSending(false);
+    if (error) {
+      toast({ title: "Couldn't send message", description: error.message, variant: "destructive" });
+      return;
+    }
+    toast({ title: "Message sent ✓", description: "Sarvesh will get back to you soon." });
+    setForm({ name: "", email: "", message: "" });
   };
 
   const resumeHref = settings?.resume_url || "/Sarvesh_Singh_Resume.pdf";
@@ -74,8 +85,8 @@ export const Contact = () => {
               <label className="mono text-xs text-muted-foreground">{">"} message</label>
               <Textarea rows={5} required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="mt-1 bg-background border-border resize-none" />
             </div>
-            <button type="submit" className="btn-primary w-full justify-center">
-              <Send className="h-4 w-4" /> send_message()
+            <button type="submit" disabled={sending} className="btn-primary w-full justify-center disabled:opacity-60">
+              <Send className="h-4 w-4" /> {sending ? "sending..." : "send_message()"}
             </button>
           </form>
         </div>
