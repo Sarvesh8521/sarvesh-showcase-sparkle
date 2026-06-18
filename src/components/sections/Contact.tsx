@@ -4,19 +4,30 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Contact = () => {
   const { toast } = useToast();
   const { settings } = useSiteSettings();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const link = `mailto:sarvesh8521@gmail.com?subject=${encodeURIComponent(
-      `Portfolio Contact — ${form.name}`
-    )}&body=${encodeURIComponent(`${form.message}\n\nFrom: ${form.name}\nEmail: ${form.email}`)}`;
-    window.location.href = link;
-    toast({ title: "Opening your email client…" });
+    setSending(true);
+    const { error } = await supabase.from("contact_messages").insert({
+      name: form.name.trim(),
+      email: form.email.trim(),
+      message: form.message.trim(),
+      read: false,
+    });
+    setSending(false);
+    if (error) {
+      toast({ title: "Couldn't send message", description: error.message, variant: "destructive" });
+      return;
+    }
+    toast({ title: "Message sent ✓", description: "Sarvesh will get back to you soon." });
+    setForm({ name: "", email: "", message: "" });
   };
 
   const resumeHref = settings?.resume_url || "/Sarvesh_Singh_Resume.pdf";
