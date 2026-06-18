@@ -143,7 +143,7 @@ const Admin = () => {
             User ID: {session.user.id}
           </p>
           <p className="text-xs text-muted-foreground">
-            Open Lovable Cloud → Database → user_roles and add a row with this user_id and role = "admin".
+            Ask the project owner to add a row in the user_roles table with this user_id and role = "admin".
           </p>
           <Button variant="outline" onClick={() => supabase.auth.signOut()}><LogOut className="h-4 w-4 mr-2" /> Sign out</Button>
         </div>
