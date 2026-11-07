@@ -44,6 +44,7 @@ export const Hero = () => {
         <div className="hidden md:block" aria-hidden="true">
           <div className="terminal-window w-64">
             <div className="terminal-window-bar"><span /><span /><span /><span className="mono ml-auto text-xs text-muted-foreground">python</span></div>
+            {settings?.profile_image_url && <img src={settings.profile_image_url} alt="Sarvesh Singh" loading="lazy" className="h-52 w-full object-cover" />}
             <pre className="mono overflow-hidden p-5 text-sm leading-7 text-muted-foreground"><code><span className="accent-text">class</span> BackendEngineer:{"\n"}  focus = ["reliability",{"\n"}    "observability", "delivery"]{"\n"}{"\n"}<span className="accent-text">print</span>("ship with care")</code></pre>
           </div>
         </div>

@@ -10,7 +10,7 @@ const roles = [
       "Translate client proposals and approved statements of work into scoped Python and Django backend requirements.",
       "Contribute to feature development, bug fixes, and test coverage across retainer and one-time engagements.",
     ],
-    proof: "Client delivery",
+    proof: "SOW-aligned delivery",
   },
   {
     icon: Briefcase,
@@ -21,7 +21,7 @@ const roles = [
       "Built REST APIs with Django and DRF for financial workflows and worked on PostgreSQL schema improvements.",
       "Collaborated in an Agile team across implementation, testing, and code review.",
     ],
-    proof: "API delivery",
+    proof: "Financial REST APIs",
   },
   {
     icon: Trophy,
@@ -66,10 +66,9 @@ export const Experience = () => (
                   <p className="text-sm text-muted-foreground">{role.organization}</p>
                   <p className="mono mt-1 text-xs text-muted-foreground">{role.period}</p>
                 </div>
-                <span className="proof-badge">{role.proof}</span>
               </div>
               <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
-                {role.bullets.map((bullet) => <li key={bullet} className="flex gap-3"><span className="mono text-primary" aria-hidden="true">›</span><span>{bullet}</span></li>)}
+                {role.bullets.map((bullet, bulletIndex) => <li key={bullet} className="flex gap-3"><span className="mono text-primary" aria-hidden="true">›</span><span>{bullet}{bulletIndex === 0 && <span className="proof-badge ml-2 align-middle">{role.proof}</span>}</span></li>)}
               </ul>
             </div>
           </article>

@@ -69,7 +69,7 @@ export const Projects = () => (
                 {project.stack.map((tag) => <span key={tag} className="tech-chip">{tag}</span>)}
               </div>
               <div className="mt-auto flex flex-wrap items-center gap-2 pt-6">
-                <span className="mono inline-flex min-h-10 items-center gap-2 px-3 text-xs text-muted-foreground" aria-disabled="true">Live Demo <span aria-hidden="true">·</span> not provided</span>
+                <Button type="button" variant="ghost" size="sm" disabled className="min-h-10 font-mono text-xs">Live Demo · pending</Button>
                 <Button asChild variant="outline" size="sm" className="ml-auto min-h-10 font-mono">
                   <a href={project.url} target="_blank" rel="noreferrer"><Github aria-hidden="true" /> GitHub <ArrowUpRight aria-hidden="true" /></a>
                 </Button>
