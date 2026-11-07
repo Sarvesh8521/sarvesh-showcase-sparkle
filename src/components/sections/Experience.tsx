@@ -1,75 +1,89 @@
 import { Briefcase, GraduationCap, Trophy } from "lucide-react";
 
-const items = [
+const roles = [
   {
     icon: Briefcase,
-    role: "Python Backend Developer — Intern",
-    org: "Auburn Digital Solutions",
-    period: "Dec 2025 – Present",
-    desc: "Building ADS Finance — a production-grade financial platform using FastAPI, PostgreSQL, microservices, JWT/RBAC, Docker and CI/CD. Translating client SOWs into backend APIs with strong test coverage.",
-    tags: ["Python", "FastAPI", "PostgreSQL", "Docker", "CI/CD", "JWT/RBAC"],
+    role: "Python Developer Intern",
+    organization: "Auburn Digital Solutions · Delhi",
+    period: "December 2025 – Present",
+    bullets: [
+      "Translate client proposals and approved statements of work into scoped Python and Django backend requirements.",
+      "Contribute to feature development, bug fixes, and test coverage across retainer and one-time engagements.",
+    ],
+    proof: "SOW-aligned delivery",
   },
   {
     icon: Briefcase,
-    role: "Software Developer — Intern",
-    org: "Kuhoo Finance",
-    period: "Feb 2025 – Nov 2025",
-    desc: "Built scalable REST APIs with Django/DRF supporting financial workflows. Optimised PostgreSQL schemas, contributed 900+ commits in Agile Scrum with strong CI/CD and code-review practices.",
-    tags: ["Django", "DRF", "PostgreSQL", "Agile"],
+    role: "Software Developer Intern",
+    organization: "Kuhoo Finance",
+    period: "February 2025 – November 2025",
+    bullets: [
+      "Built REST APIs with Django and DRF for financial workflows and worked on PostgreSQL schema improvements.",
+      "Collaborated in an Agile team across implementation, testing, and code review.",
+    ],
+    proof: "Financial REST APIs",
   },
   {
     icon: Trophy,
-    role: "Codeathon Organiser — IT Forum",
-    org: "MIT WPU, Pune",
+    role: "Codeathon Organizer · IT Forum",
+    organization: "MIT World Peace University · Pune",
     period: "2024",
-    desc: "Organised a campus-wide Codeathon for the IT Forum club at MIT WPU and built the official event website end-to-end.",
-    tags: ["Event", "Web", "Leadership"],
+    bullets: ["Organized a campus Codeathon and built the IT Forum club website end to end."],
+    proof: "Event + website",
   },
   {
     icon: GraduationCap,
-    role: "Master of Computer Applications (MCA)",
-    org: "MIT World Peace University, Pune",
+    role: "Master of Computer Applications",
+    organization: "MIT World Peace University · Pune",
     period: "2023 – 2025",
-    desc: "Coursework across systems, databases, distributed computing and software engineering.",
-    tags: ["MCA", "MIT WPU"],
+    bullets: ["Coursework in systems, databases, distributed computing, and software engineering."],
+    proof: "MCA",
   },
 ];
 
-export const Experience = () => (
-  <section id="experience" className="py-24 px-6">
-    <div className="max-w-6xl mx-auto">
-      <div className="mb-12">
-        <p className="mono text-sm text-muted-foreground mb-2">// experience in scalable backends &amp; AI systems</p>
-        <h2 className="text-3xl md:text-4xl font-bold">Professional Experience</h2>
-      </div>
+const skillGroups = [
+  { label: "Languages", skills: ["Python", "SQL"] },
+  { label: "Frameworks", skills: ["FastAPI", "Django", "Django REST Framework"] },
+  { label: "Infra & Tools", skills: ["PostgreSQL", "Docker", "Git", "CI/CD"] },
+  { label: "AI", skills: ["LLMs", "RAG", "HuggingFace", "ChromaDB"] },
+];
 
-      <div className="grid md:grid-cols-2 gap-5">
-        {items.map((it, i) => (
-          <article
-            key={i}
-            className="card-surface p-6 animate-fade-in-up"
-            style={{ animationDelay: `${i * 80}ms` }}
-          >
-            <div className="flex items-start gap-4">
-              <div className="w-11 h-11 rounded-md border border-border flex items-center justify-center accent-text shrink-0">
-                <it.icon className="h-5 w-5" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-base">{it.role}</h3>
-                <p className="text-sm text-muted-foreground">{it.org}</p>
-                <p className="mono text-xs text-muted-foreground mt-0.5">{it.period}</p>
-                <p className="text-sm text-foreground/80 mt-3 leading-relaxed">{it.desc}</p>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {it.tags.map((t) => (
-                    <span key={t} className="mono text-[11px] px-2 py-0.5 rounded border border-border text-muted-foreground">
-                      {t}
-                    </span>
-                  ))}
+export const Experience = () => (
+  <section id="experience" aria-labelledby="experience-title" className="px-5 py-20 sm:px-8">
+    <div className="mx-auto max-w-6xl">
+      <div className="section-intro mb-10">
+        <p className="section-prefix">&gt; EXPERIENCE</p>
+        <h2 id="experience-title" className="section-title">Where I’ve contributed</h2>
+      </div>
+      <div className="experience-list">
+        {roles.map((role) => (
+          <article key={role.role} className="experience-row">
+            <div className="experience-icon"><role.icon aria-hidden="true" className="h-5 w-5" /></div>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <h3 className="text-lg font-semibold">{role.role}</h3>
+                  <p className="text-sm text-muted-foreground">{role.organization}</p>
+                  <p className="mono mt-1 text-xs text-muted-foreground">{role.period}</p>
                 </div>
               </div>
+              <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
+                {role.bullets.map((bullet, bulletIndex) => <li key={bullet} className="flex gap-3"><span className="mono text-primary" aria-hidden="true">›</span><span>{bullet}{bulletIndex === 0 && <span className="proof-badge ml-2 align-middle">{role.proof}</span>}</span></li>)}
+              </ul>
             </div>
           </article>
         ))}
+      </div>
+      <div id="skills" className="mt-14 border-t border-border pt-8">
+        <p className="mono mb-5 text-sm text-muted-foreground">&gt; TOOLKIT</p>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {skillGroups.map((group) => (
+            <div key={group.label}>
+              <h3 className="mono mb-3 text-sm font-semibold text-primary">{group.label}</h3>
+              <div className="flex flex-wrap gap-2">{group.skills.map((skill) => <span key={skill} className="tech-chip">{skill}</span>)}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>

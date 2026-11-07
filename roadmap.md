@@ -1,0 +1,3 @@
+- [x] Refresh portfolio introduction, featured projects, experience, skills, writing, and section navigation.
+- [x] Preserve contact, editable resume/profile, truthful proof, reduced-motion support, and static social metadata.
+- [ ] Verify current build and desktop/mobile preview; fix any issues found.
