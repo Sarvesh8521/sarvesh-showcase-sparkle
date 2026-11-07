@@ -109,13 +109,14 @@
   .section-band { border-block: 1px solid hsl(var(--border) / 0.65); background: hsl(var(--card) / 0.22); }
   .section-intro { max-width: 48rem; }
   .section-prefix { @apply text-sm font-semibold text-primary; font-family: 'JetBrains Mono', monospace; }
-  .section-title { @apply mt-2 text-3xl font-bold uppercase leading-tight text-foreground sm:text-4xl; }
+  .section-title { @apply mt-2 text-3xl font-bold uppercase leading-tight text-foreground; }
   .tech-chip { @apply inline-flex min-h-7 items-center border border-border px-2 py-1 text-[11px] text-muted-foreground; font-family: 'JetBrains Mono', monospace; }
   .proof-badge { @apply inline-flex min-h-7 items-center border border-primary/40 px-2 py-1 text-[10px] uppercase text-primary; font-family: 'JetBrains Mono', monospace; }
   .experience-list { border-top: 1px solid hsl(var(--border)); }
-  .experience-row { @apply flex gap-4 border-b border-border py-6 sm:gap-6; }
+  .experience-row { @apply flex gap-4 border-b border-border py-6; }
   .experience-icon { @apply flex h-10 w-10 shrink-0 items-center justify-center border border-border text-primary; }
-  .writing-row { @apply border-t border-border py-5 transition-colors hover:border-primary/60; }
+  .writing-row { @apply border-t border-border py-5 transition-colors; }
+  .writing-row:hover { border-color: hsl(var(--primary) / .6); }
   .project-visual { @apply relative flex min-h-40 flex-col justify-between overflow-hidden border border-border p-4; background: hsl(var(--background)); }
   .project-visual::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(hsl(var(--grid-color)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--grid-color)) 1px, transparent 1px); background-size: 18px 18px; opacity: .7; mask-image: linear-gradient(to bottom, black, transparent); }
   .project-visual-label, .project-visual-diagram, .project-visual-note { @apply relative z-10; }
