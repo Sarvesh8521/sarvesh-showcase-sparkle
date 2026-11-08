@@ -13,31 +13,31 @@ type FeaturedProject = {
 
 const projects: FeaturedProject[] = [
   {
-    title: "LocalGPT",
-    problem: "Document Q&A that keeps prompts and files on the user's own machine.",
-    stack: ["Python", "RAG", "ChromaDB", "HuggingFace", "FastAPI"],
-    metric: "Metric pending",
-    metricContext: "Verified outcome not supplied",
-    url: "https://github.com/Sarvesh8521/LOCAL_GPT",
-    visual: "LOCAL DOCUMENT Q&A",
+    title: "DocLens — AI Document Summarization",
+    problem: "Unified document ingestion and authentication for an AI summarization platform, supporting eight file formats.",
+    stack: ["Python", "Django REST Framework", "PostgreSQL", "JWT"],
+    metric: "8 formats",
+    metricContext: "PDF, DOCX, XLSX, CSV, TXT, JSON, XML, HTML",
+    url: "https://github.com/Sarvesh8521",
+    visual: "8 FORMATS → ONE PARSER",
   },
   {
-    title: "AI Resume Tailor Agent",
-    problem: "Turns a job description into a structured, role-specific resume draft.",
-    stack: ["Python", "LLM", "Prompt Engineering"],
-    metric: "Metric pending",
-    metricContext: "Verified outcome not supplied",
-    url: "https://github.com/Sarvesh8521/AI-Resume-Tailor-Agent",
-    visual: "JOB DESCRIPTION → RESUME",
+    title: "Website Content Intelligence",
+    problem: "Crawls and indexes website content for source-cited semantic answers, duplicate detection, and content-gap discovery.",
+    stack: ["Python", "FastAPI", "React", "Playwright", "ChromaDB", "RAG"],
+    metric: "Source-cited RAG",
+    metricContext: "Crawl → index → retrieve with citations",
+    url: "https://github.com/Sarvesh8521",
+    visual: "CRAWL → INDEX → ANSWER",
   },
   {
-    title: "Stock Data Intelligence Dashboard",
-    problem: "Ingests and visualizes market data for more accessible analysis.",
-    stack: ["Python", "Pandas", "Data Visualization"],
-    metric: "Metric pending",
-    metricContext: "Verified outcome not supplied",
-    url: "https://github.com/Sarvesh8521/Stock-Data-Intelligence-Dashboard",
-    visual: "MARKET DATA PIPELINE",
+    title: "TaskFlow — Task Management System",
+    problem: "A multi-tenant task tracker with organizations, projects, sprints, and a Kanban workflow.",
+    stack: ["Python", "Django REST Framework", "PostgreSQL", "JWT", "Docker", "Kubernetes"],
+    metric: "Multi-tenant",
+    metricContext: "Role-based access, task lifecycle, and deployment manifests",
+    url: "https://github.com/Sarvesh8521/Task-management",
+    visual: "ORGANIZATIONS → SPRINTS → TASKS",
   },
 ];
 
@@ -51,7 +51,7 @@ export const Projects = () => (
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
         {projects.map((project, index) => (
-          <article key={project.title} className={`project-card card-surface flex min-w-0 flex-col p-5 animate-fade-in-up project-card-${index + 1}`}>
+          <article key={project.title} className={`project-card card-surface flex min-w-0 flex-col p-5 project-card-${index + 1}`}>
             <div className="project-visual" aria-label={`${project.visual} placeholder; project image not provided`}>
               <span className="mono project-visual-label"><ImageIcon aria-hidden="true" className="h-4 w-4" /> PROJECT SNAPSHOT</span>
               <span className="project-visual-diagram mono" aria-hidden="true">{project.visual}</span>

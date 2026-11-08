@@ -1,15 +1,16 @@
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { Button } from "@/components/ui/button";
 import { Download, Github, Linkedin, ArrowDownRight } from "lucide-react";
+import resumeAsset from "@/assets/Sarvesh_Resume_2026.pdf.asset.json";
 
-const RESUME_FALLBACK = "/Sarvesh_Singh_Resume.pdf";
+const RESUME_FALLBACK = resumeAsset.url;
 
 export const Hero = () => {
   const { settings } = useSiteSettings();
   const resumeHref = settings?.resume_url || RESUME_FALLBACK;
 
   return (
-    <section id="home" aria-labelledby="hero-title" className="min-h-[88vh] flex items-center px-5 pb-16 pt-28 sm:px-8">
+    <section id="home" aria-labelledby="hero-title" className="hero-section min-h-[88vh] flex items-center px-5 pb-16 pt-28 sm:px-8">
       <div className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-[minmax(0,1fr)_auto]">
         <div className="max-w-4xl">
           <p className="mono mb-5 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
@@ -19,7 +20,7 @@ export const Hero = () => {
             Sarvesh Singh<span aria-hidden="true" className="terminal-caret">_</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Python backend developer building dependable APIs and practical AI systems with FastAPI, Django, and PostgreSQL.
+            Software Engineer building Python backend services, document intelligence, and production RAG systems.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Button asChild size="lg" className="min-h-12 font-mono">

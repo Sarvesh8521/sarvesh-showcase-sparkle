@@ -1,3 +1,4 @@
 - [x] Refresh portfolio introduction, featured projects, experience, skills, writing, and section navigation.
-- [x] Preserve contact, editable resume/profile, truthful proof, reduced-motion support, and static social metadata.
-- [x] Verify current build and desktop/mobile preview; fix issues found.
+- [ ] Polish hero background, 200ms card hover, and restrained section reveals with reduced-motion support.
+- [ ] Replace the downloadable resume and refresh portfolio facts from the newly shared PDFs.
+- [ ] Verify the current build, live preview, and the resume download target.
