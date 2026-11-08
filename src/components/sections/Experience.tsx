@@ -3,25 +3,36 @@ import { Briefcase, GraduationCap, Trophy } from "lucide-react";
 const roles = [
   {
     icon: Briefcase,
-    role: "Python Developer Intern",
-    organization: "Auburn Digital Solutions · Delhi",
-    period: "December 2025 – Present",
+    role: "Software Engineer · via TheCodeStory",
+    organization: "Omnicom Group",
+    period: "May 2026 – Present",
     bullets: [
-      "Translate client proposals and approved statements of work into scoped Python and Django backend requirements.",
-      "Contribute to feature development, bug fixes, and test coverage across retainer and one-time engagements.",
+      "Built DocLens authentication and a unified document parser spanning PDF, DOCX, XLSX, CSV, TXT, JSON, XML, and HTML.",
+      "Architecting a FastAPI and React website intelligence platform with ChromaDB retrieval, source citations, and content-gap detection.",
     ],
-    proof: "SOW-aligned delivery",
+    proof: "8-format document parser",
   },
   {
     icon: Briefcase,
     role: "Software Developer Intern",
-    organization: "Kuhoo Finance",
+    organization: "Auburn Digital Solutions",
+    period: "December 2025 – April 2026",
+    bullets: [
+      "Built ADS Finance backend modules for multi-level financial approval workflows using FastAPI, PostgreSQL, JWT, and RBAC.",
+      "Containerized services with Docker and added pytest coverage and structured logging for CI/CD readiness.",
+    ],
+    proof: "Approval workflows",
+  },
+  {
+    icon: Briefcase,
+    role: "SDE Intern",
+    organization: "Kuhoo Finance Pvt Ltd",
     period: "February 2025 – November 2025",
     bullets: [
-      "Built REST APIs with Django and DRF for financial workflows and worked on PostgreSQL schema improvements.",
-      "Collaborated in an Agile team across implementation, testing, and code review.",
+      "Raised automated test coverage to 87% across six core services, strengthening CI quality gates.",
+      "Built a Django and DRF task-management system with PostgreSQL, JWT, RBAC, and Kubernetes deployment manifests.",
     ],
-    proof: "Financial REST APIs",
+    proof: "87% test coverage",
   },
   {
     icon: Trophy,
@@ -36,16 +47,16 @@ const roles = [
     role: "Master of Computer Applications",
     organization: "MIT World Peace University · Pune",
     period: "2023 – 2025",
-    bullets: ["Coursework in systems, databases, distributed computing, and software engineering."],
-    proof: "MCA",
+    bullets: ["Master of Computer Applications · CGPA 7.81 · coursework in systems, databases, distributed computing, and software engineering."],
+    proof: "MCA · 7.81 CGPA",
   },
 ];
 
 const skillGroups = [
-  { label: "Languages", skills: ["Python", "SQL"] },
-  { label: "Frameworks", skills: ["FastAPI", "Django", "Django REST Framework"] },
-  { label: "Infra & Tools", skills: ["PostgreSQL", "Docker", "Git", "CI/CD"] },
-  { label: "AI", skills: ["LLMs", "RAG", "HuggingFace", "ChromaDB"] },
+  { label: "Languages", skills: ["Python", "JavaScript", "C++", "SQL"] },
+  { label: "Backend", skills: ["FastAPI", "Django", "DRF", "Flask", "REST APIs", "Microservices"] },
+  { label: "Data & Platform", skills: ["PostgreSQL", "MySQL", "ChromaDB", "Docker", "Kubernetes", "Redis"] },
+  { label: "AI & Quality", skills: ["RAG", "LLM Integration", "Prompt Engineering", "pytest", "CI/CD"] },
 ];
 
 export const Experience = () => (

@@ -30,7 +30,7 @@ export const Contact = () => {
     setForm({ name: "", email: "", message: "" });
   };
 
-  const resumeHref = settings?.resume_url || "/Sarvesh_Singh_Resume.pdf";
+  const resumeHref = settings?.resume_url || "/__l5e/assets-v1/be9b1f0b-9c58-4ec0-9a42-6c5adf9f835f/Sarvesh_Resume_2026.pdf";
 
   return (
     <section id="contact" className="py-24 px-6">
@@ -55,7 +55,7 @@ export const Contact = () => {
                 <Phone className="h-4 w-4" /> +91 6204350177
               </a>
               <div className="flex items-center gap-3 text-muted-foreground">
-                <MapPin className="h-4 w-4" /> Pune / Delhi, India
+                <MapPin className="h-4 w-4" /> Gurugram, India
               </div>
             </div>
 

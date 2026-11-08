@@ -2,7 +2,7 @@ import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export const About = () => {
   const { settings } = useSiteSettings();
-  const philosophy = settings?.bio || "I love backend engineering because the best systems feel dependable: clear APIs, observable behavior, and thoughtful failure handling. I enjoy turning real requirements into software teams can understand, operate, and trust.";
+  const philosophy = settings?.bio || "Backend-focused Software Engineer building production document-intelligence and RAG systems in Python, FastAPI, and Django REST Framework. I enjoy owning features end to end—from API design and PostgreSQL data modeling to authentication and containerized deployment.";
 
   return (
     <section id="about" aria-labelledby="about-title" className="section-band px-5 py-20 sm:px-8">

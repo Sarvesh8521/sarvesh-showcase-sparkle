@@ -80,7 +80,7 @@
     background: hsl(var(--card));
     border: 1px solid hsl(var(--border));
     border-radius: var(--radius);
-    transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+    transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
     overflow: hidden;
   }
   .card-surface::before {
@@ -90,20 +90,27 @@
     border-radius: inherit;
     pointer-events: none;
     opacity: 0;
-    transition: opacity .3s ease;
+    transition: opacity 200ms ease;
     background: radial-gradient(
       450px circle at var(--mx, 50%) var(--my, 50%),
-      hsl(var(--primary) / 0.28),
-      hsl(var(--primary) / 0.08) 40%,
+      hsl(var(--primary) / 0.2),
+      hsl(var(--primary) / 0.06) 40%,
       transparent 70%
     );
   }
   .card-surface:hover::before { opacity: 1; }
   .card-surface:hover {
-    border-color: hsl(var(--primary) / 0.7);
-    box-shadow: 0 10px 40px -10px hsl(var(--primary) / 0.45), 0 0 0 1px hsl(var(--primary) / 0.25) inset;
-    transform: translateY(-3px);
+    border-color: hsl(var(--primary) / 0.55);
+    box-shadow: 0 8px 24px -12px hsl(var(--primary) / 0.35), 0 0 0 1px hsl(var(--primary) / 0.12) inset;
+    transform: translateY(-2px);
   }
+  .card-surface:focus-within { border-color: hsl(var(--primary) / 0.55); box-shadow: 0 8px 24px -12px hsl(var(--primary) / 0.35); }
+  .hero-section { position: relative; isolation: isolate; }
+  .hero-section::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background-image: radial-gradient(ellipse at 22% 46%, hsl(var(--primary) / .07), transparent 58%), linear-gradient(hsl(var(--grid-color) / .5) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--grid-color) / .5) 1px, transparent 1px); background-size: auto, 32px 32px, 32px 32px; mask-image: linear-gradient(to bottom, black 30%, transparent 100%); }
+  .section-reveal { opacity: 0; transform: translateY(8px); transition: opacity 360ms ease-out, transform 360ms ease-out; }
+  .section-reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .cursor-glow { transition-duration: 220ms; }
+  @media (hover: none) { .card-surface:hover { transform: none; box-shadow: none; border-color: hsl(var(--border)); } .card-surface:hover::before { opacity: 0; } }
   @media (hover: none) { body, a, button, input, textarea, select { cursor: auto; } }
 
   .section-band { border-block: 1px solid hsl(var(--border) / 0.65); background: hsl(var(--card) / 0.22); }
@@ -175,4 +182,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .section-reveal { opacity: 1; transform: none; }
+  .cursor-glow { display: none; }
 }
