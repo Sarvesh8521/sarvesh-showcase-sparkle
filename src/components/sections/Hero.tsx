@@ -1,9 +1,8 @@
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { Button } from "@/components/ui/button";
 import { Download, Github, Linkedin, ArrowDownRight } from "lucide-react";
-import resumeAsset from "@/assets/Sarvesh_Resume_2026.pdf.asset.json";
 
-const RESUME_FALLBACK = resumeAsset.url;
+const RESUME_FALLBACK = "/resume-upload.pdf";
 
 export const Hero = () => {
   const { settings } = useSiteSettings();
