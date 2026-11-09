@@ -15,7 +15,7 @@ const projects: FeaturedProject[] = [
   {
     title: "DocLens — AI Document Summarization",
     problem: "Unified document ingestion and authentication for an AI summarization platform, supporting eight file formats.",
-    stack: ["Python", "Django REST Framework", "PostgreSQL", "JWT"],
+    stack: ["Python", "Django REST Framework", "PostgreSQL", "JWT", "Docker"],
     metric: "8 formats",
     metricContext: "PDF, DOCX, XLSX, CSV, TXT, JSON, XML, HTML",
     url: "https://github.com/Sarvesh8521",
@@ -32,7 +32,7 @@ const projects: FeaturedProject[] = [
   },
   {
     title: "TaskFlow — Task Management System",
-    problem: "A multi-tenant task tracker with organizations, projects, sprints, and a Kanban workflow.",
+    problem: "A multi-tenant task tracker with organizations, projects, sprints, a Kanban workflow, and automated token refresh.",
     stack: ["Python", "Django REST Framework", "PostgreSQL", "JWT", "Docker", "Kubernetes"],
     metric: "Multi-tenant",
     metricContext: "Role-based access, task lifecycle, and deployment manifests",

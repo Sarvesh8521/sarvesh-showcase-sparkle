@@ -8,22 +8,27 @@ import { Projects } from "@/components/sections/Projects";
 import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
 import { Contact } from "@/components/sections/Contact";
+import { useSectionReveal } from "@/hooks/useSectionReveal";
 
-const Index = () => (
-  <div className="min-h-screen bg-background relative overflow-x-hidden">
-    <GridBackground />
-    <CursorGlow />
-    <Navbar />
-    <main className="relative z-10">
-      <Hero />
-      <Projects />
-      <Experience />
-      <About />
-      <Skills />
-      <Contact />
-    </main>
-    <Footer />
-  </div>
-);
+const Index = () => {
+  useSectionReveal();
+
+  return (
+    <div className="min-h-screen bg-background relative overflow-x-hidden">
+      <GridBackground />
+      <CursorGlow />
+      <Navbar />
+      <main className="relative z-10">
+        <Hero />
+        <Projects />
+        <Experience />
+        <About />
+        <Skills />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
 export default Index;

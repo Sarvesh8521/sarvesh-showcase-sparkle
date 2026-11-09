@@ -30,7 +30,7 @@ export const Contact = () => {
     setForm({ name: "", email: "", message: "" });
   };
 
-  const resumeHref = settings?.resume_url || "/__l5e/assets-v1/be9b1f0b-9c58-4ec0-9a42-6c5adf9f835f/Sarvesh_Resume_2026.pdf";
+  const resumeHref = settings?.resume_url || "/resume-upload.pdf";
 
   return (
     <section id="contact" className="py-24 px-6">

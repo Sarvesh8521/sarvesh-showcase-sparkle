@@ -38,7 +38,7 @@ const roles = [
     icon: Trophy,
     role: "Codeathon Organizer · IT Forum",
     organization: "MIT World Peace University · Pune",
-    period: "2024",
+    period: "MIT WPU · Pune",
     bullets: ["Organized a campus Codeathon and built the IT Forum club website end to end."],
     proof: "Event + website",
   },
