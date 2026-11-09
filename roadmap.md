@@ -1,4 +1,4 @@
 - [x] Refresh portfolio introduction, featured projects, experience, skills, writing, and section navigation.
 - [x] Polish hero background, 200ms card hover, and restrained section reveals with reduced-motion support.
 - [x] Replace the downloadable resume and refresh portfolio facts from the newly shared PDFs.
-- [ ] Verify the current build, live preview, and the resume download target.
+- [x] Verify the current build, live preview, and the resume download target.
