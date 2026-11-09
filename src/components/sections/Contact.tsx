@@ -5,6 +5,7 @@ import { Textarea } from "../ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { supabase } from "@/integrations/supabase/client";
+import resumeAsset from "@/assets/Sarvesh_Resume_2026.pdf.asset.json";
 
 export const Contact = () => {
   const { toast } = useToast();
@@ -30,7 +31,7 @@ export const Contact = () => {
     setForm({ name: "", email: "", message: "" });
   };
 
-  const resumeHref = settings?.resume_url || "/__l5e/assets-v1/be9b1f0b-9c58-4ec0-9a42-6c5adf9f835f/Sarvesh_Resume_2026.pdf";
+  const resumeHref = settings?.resume_url || resumeAsset.url;
 
   return (
     <section id="contact" className="py-24 px-6">

@@ -38,7 +38,7 @@ export const CursorGlow = () => {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed z-[60] transition-opacity duration-300"
+      className="cursor-glow pointer-events-none fixed z-[60] transition-opacity duration-200"
       style={{
         left: pos.x,
         top: pos.y,
