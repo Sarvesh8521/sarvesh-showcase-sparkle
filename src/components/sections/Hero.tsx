@@ -21,11 +21,11 @@ export const Hero = () => {
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             Software Engineer building Python backend services, document intelligence, and production RAG systems.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button asChild size="lg" className="min-h-12 font-mono">
+          <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+            <Button asChild size="lg" className="min-h-12 w-full font-mono lg:w-auto">
               <a href="#projects">View My Work <ArrowDownRight aria-hidden="true" /></a>
             </Button>
-            <Button asChild variant="outline" size="lg" className="min-h-12 font-mono">
+            <Button asChild variant="outline" size="lg" className="min-h-12 w-full font-mono lg:w-auto">
               <a href={resumeHref} download="Sarvesh_Singh_Resume.pdf"><Download aria-hidden="true" /> Download Resume</a>
             </Button>
           </div>
