@@ -26,7 +26,7 @@ export const Navbar = () => {
         <div className="nav-scroll flex min-w-0 flex-1 items-center justify-start gap-4 sm:justify-end sm:gap-6">
           {links.map((link) => <a key={link.id} href={`#${link.id}`} className="nav-link shrink-0">{link.label}</a>)}
         </div>
-        <Button asChild variant="outline" size="icon" className="h-10 w-10 shrink-0" aria-label="Visit GitHub profile">
+        <Button asChild variant="outline" size="icon" className="h-11 w-11 shrink-0" aria-label="Visit GitHub profile">
           <a href="https://github.com/Sarvesh8521" target="_blank" rel="noreferrer" title="GitHub"><Github aria-hidden="true" /></a>
         </Button>
       </nav>
