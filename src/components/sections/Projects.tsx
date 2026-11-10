@@ -79,7 +79,9 @@ export const Projects = () => (
         ))}
       </div>
       <div className="mt-8 text-center">
-        <a className="mono inline-flex min-h-11 items-center gap-2 text-sm text-primary underline-offset-4 hover:underline" href="https://github.com/Sarvesh8521" target="_blank" rel="noreferrer">Explore all repositories <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></a>
+        <Button asChild variant="ghost" className="mono min-h-11 w-full text-sm text-primary lg:w-auto">
+          <a href="https://github.com/Sarvesh8521" target="_blank" rel="noreferrer">Explore all repositories <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></a>
+        </Button>
       </div>
     </div>
   </section>
