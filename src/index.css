@@ -125,6 +125,7 @@
   .writing-row { @apply border-t border-border py-5 transition-colors; }
   .writing-row:hover { border-color: hsl(var(--primary) / .6); }
   .project-visual { @apply relative flex min-h-40 flex-col justify-between overflow-hidden border border-border p-4; background: hsl(var(--background)); }
+  .project-visual img { @apply relative z-10 size-full min-h-40 object-cover; }
   .project-visual::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(hsl(var(--grid-color)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--grid-color)) 1px, transparent 1px); background-size: 18px 18px; opacity: .7; mask-image: linear-gradient(to bottom, black, transparent); }
   .project-visual-label, .project-visual-diagram, .project-visual-note { @apply relative z-10; }
   .project-visual-label { @apply flex items-center gap-2 text-[11px] text-muted-foreground; }
