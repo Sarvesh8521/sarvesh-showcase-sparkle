@@ -1,45 +1,7 @@
-import { ArrowUpRight, Github, Image as ImageIcon } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-type FeaturedProject = {
-  title: string;
-  problem: string;
-  stack: string[];
-  metric: string;
-  metricContext: string;
-  url: string;
-  visual: string;
-};
-
-const projects: FeaturedProject[] = [
-  {
-    title: "DocLens — AI Document Summarization",
-    problem: "Unified document ingestion and authentication for an AI summarization platform, supporting eight file formats.",
-    stack: ["Python", "Django REST Framework", "PostgreSQL", "JWT", "Docker"],
-    metric: "8 formats",
-    metricContext: "PDF, DOCX, XLSX, CSV, TXT, JSON, XML, HTML",
-    url: "https://github.com/Sarvesh8521",
-    visual: "8 FORMATS → ONE PARSER",
-  },
-  {
-    title: "Website Content Intelligence",
-    problem: "Crawls and indexes website content for source-cited semantic answers, duplicate detection, and content-gap discovery.",
-    stack: ["Python", "FastAPI", "React", "Playwright", "ChromaDB", "RAG"],
-    metric: "Source-cited RAG",
-    metricContext: "Crawl → index → retrieve with citations",
-    url: "https://github.com/Sarvesh8521",
-    visual: "CRAWL → INDEX → ANSWER",
-  },
-  {
-    title: "TaskFlow — Task Management System",
-    problem: "A multi-tenant task tracker with organizations, projects, sprints, a Kanban workflow, and automated token refresh.",
-    stack: ["Python", "Django REST Framework", "PostgreSQL", "JWT", "Docker", "Kubernetes"],
-    metric: "Multi-tenant",
-    metricContext: "Role-based access, task lifecycle, and deployment manifests",
-    url: "https://github.com/Sarvesh8521/Task-management",
-    visual: "ORGANIZATIONS → SPRINTS → TASKS",
-  },
-];
+import { ProjectCard } from "@/components/ProjectCard";
+import { projects } from "@/data/projects";
 
 export const Projects = () => (
   <section id="projects" aria-labelledby="projects-title" className="section-band px-5 py-20 sm:px-8">
@@ -50,33 +12,7 @@ export const Projects = () => (
         <p className="mt-3 max-w-2xl text-muted-foreground">Selected backend and AI projects, with the code behind each one.</p>
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
-        {projects.map((project, index) => (
-          <article key={project.title} className={`project-card card-surface flex min-w-0 flex-col p-5 project-card-${index + 1}`}>
-            <div className="project-visual" aria-label={`${project.visual} placeholder; project image not provided`}>
-              <span className="mono project-visual-label"><ImageIcon aria-hidden="true" className="h-4 w-4" /> PROJECT SNAPSHOT</span>
-              <span className="project-visual-diagram mono" aria-hidden="true">{project.visual}</span>
-              <span className="mono project-visual-note">IMAGE PENDING</span>
-            </div>
-            <div className="flex flex-1 flex-col pt-5">
-              <p className="mono mb-2 text-xs text-muted-foreground">0{index + 1} / FEATURED PROJECT</p>
-              <h3 className="text-xl font-semibold leading-snug">{project.title}</h3>
-              <p className="mt-2 min-h-[3.25rem] text-sm leading-relaxed text-muted-foreground">{project.problem}</p>
-              <div className="mt-5 border-l-2 border-primary pl-3">
-                <p className="mono text-xl font-semibold text-primary">{project.metric}</p>
-                <p className="mono mt-1 text-[11px] text-muted-foreground">{project.metricContext}</p>
-              </div>
-              <div className="mt-5 flex flex-wrap gap-2" aria-label="Technology stack">
-                {project.stack.map((tag) => <span key={tag} className="tech-chip">{tag}</span>)}
-              </div>
-              <div className="mt-auto flex flex-col items-stretch gap-2 pt-6 lg:flex-row lg:items-center">
-                <Button type="button" variant="ghost" size="sm" disabled className="min-h-11 w-full font-mono text-xs lg:w-auto">Live Demo · pending</Button>
-                <Button asChild variant="outline" size="sm" className="min-h-11 w-full font-mono lg:ml-auto lg:w-auto">
-                  <a href={project.url} target="_blank" rel="noreferrer"><Github aria-hidden="true" /> GitHub <ArrowUpRight aria-hidden="true" /></a>
-                </Button>
-              </div>
-            </div>
-          </article>
-        ))}
+        {projects.map((project, index) => <ProjectCard key={project.title} project={project} index={index} />)}
       </div>
       <div className="mt-8 text-center">
         <Button asChild variant="ghost" className="mono min-h-11 w-full text-sm text-primary lg:w-auto">
