@@ -2,6 +2,7 @@ import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { Button } from "@/components/ui/button";
 import { Download, Github, Linkedin, ArrowDownRight } from "lucide-react";
 import { HandwritingText } from "@/components/animations/HandwritingText";
+import { PokePullPortrait } from "@/components/animations/PokePullPortrait";
 
 const RESUME_FALLBACK = "/resume-upload.pdf";
 
@@ -46,7 +47,9 @@ export const Hero = () => {
         <div className="hidden md:block" aria-hidden="true">
           <div className="terminal-window w-64">
             <div className="terminal-window-bar"><span /><span /><span /><span className="mono ml-auto text-xs text-muted-foreground">python</span></div>
-            {settings?.profile_image_url && <img src={settings.profile_image_url} alt="Sarvesh Singh" loading="lazy" className="h-52 w-full object-cover" />}
+            {settings?.profile_image_url && (
+              <PokePullPortrait defaultSrc={settings.profile_image_url} alt="Sarvesh Singh" />
+            )}
             <pre className="mono overflow-hidden p-5 text-sm leading-7 text-muted-foreground"><code><span className="accent-text">class</span> BackendEngineer:{"\n"}  focus = ["reliability",{"\n"}    "observability", "delivery"]{"\n"}{"\n"}<span className="accent-text">print</span>("ship with care")</code></pre>
           </div>
         </div>
