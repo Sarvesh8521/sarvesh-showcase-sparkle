@@ -1,6 +1,7 @@
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { Button } from "@/components/ui/button";
 import { Download, Github, Linkedin, ArrowDownRight } from "lucide-react";
+import { HandwritingText } from "@/components/animations/HandwritingText";
 
 const RESUME_FALLBACK = "/resume-upload.pdf";
 
@@ -18,6 +19,7 @@ export const Hero = () => {
           <h1 id="hero-title" className="terminal-title text-5xl font-bold leading-[1.08] sm:text-6xl md:text-7xl">
             Sarvesh Singh<span aria-hidden="true" className="terminal-caret">_</span>
           </h1>
+          <HandwritingText text="AI/ML Engineer" className="mt-5 max-w-xl" />
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             Software Engineer building Python backend services, document intelligence, and production RAG systems.
           </p>

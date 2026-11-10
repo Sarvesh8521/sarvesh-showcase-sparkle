@@ -106,6 +106,17 @@
   }
   .card-surface:focus-within { border-color: hsl(var(--primary) / 0.55); box-shadow: 0 8px 24px -12px hsl(var(--primary) / 0.35); }
   .hero-section { position: relative; isolation: isolate; }
+.handwriting-wrap { overflow: hidden; width: min(100%, 30rem); }
+.handwriting-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.handwriting-text { fill: transparent; stroke: hsl(var(--primary)); stroke-width: 1.25px; stroke-dasharray: 2200; stroke-dashoffset: 2200; stroke-linecap: round; stroke-linejoin: round; font-family: var(--font-mono); font-size: 56px; font-weight: 700; letter-spacing: 1px; paint-order: stroke; animation: handwriting-draw 2.6s cubic-bezier(.65, 0, .35, 1) forwards; }
+.handwriting-guide { fill: none; stroke: transparent; }
+.handwriting-pen { fill: hsl(var(--primary)); stroke: hsl(var(--primary)); stroke-width: 2; stroke-linecap: round; opacity: 0; transform-origin: 0 7px; animation: handwriting-pen-in 2.6s cubic-bezier(.65, 0, .35, 1) forwards; }
+@keyframes handwriting-draw { from { stroke-dashoffset: 2200; } to { stroke-dashoffset: 0; } }
+@keyframes handwriting-pen-in { 0%, 4% { opacity: 0; } 8%, 92% { opacity: .95; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .handwriting-text { animation: none; stroke-dashoffset: 0; }
+  .handwriting-pen { display: none; }
+}
   .hero-section::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background-image: radial-gradient(ellipse at 22% 46%, hsl(var(--primary) / .07), transparent 58%), linear-gradient(hsl(var(--grid-color) / .5) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--grid-color) / .5) 1px, transparent 1px); background-size: auto, 32px 32px, 32px 32px; mask-image: linear-gradient(to bottom, black 30%, transparent 100%); }
   .section-reveal { opacity: 0; transform: translateY(8px); transition: opacity 360ms ease-out, transform 360ms ease-out; }
   .section-reveal.is-visible { opacity: 1; transform: translateY(0); }
