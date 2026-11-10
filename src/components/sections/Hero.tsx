@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Download, Github, Linkedin, ArrowDownRight } from "lucide-react";
 import { HandwritingText } from "@/components/animations/HandwritingText";
 import { PokePullPortrait } from "@/components/animations/PokePullPortrait";
+import { FloatingSkillField } from "@/components/animations/FloatingSkillField";
 
 const RESUME_FALLBACK = "/resume-upload.pdf";
 
@@ -44,8 +45,9 @@ export const Hero = () => {
             </a>
           </div>
         </div>
-        <div className="hidden md:block" aria-hidden="true">
-          <div className="terminal-window w-64">
+        <div className="relative hidden md:block">
+          <FloatingSkillField />
+          <div className="terminal-window relative z-10 w-64">
             <div className="terminal-window-bar"><span /><span /><span /><span className="mono ml-auto text-xs text-muted-foreground">python</span></div>
             {settings?.profile_image_url && (
               <PokePullPortrait defaultSrc={settings.profile_image_url} alt="Sarvesh Singh" />
