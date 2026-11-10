@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, Send, Github, Linkedin, FileText } from "lucide-react";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
+import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { supabase } from "@/integrations/supabase/client";
@@ -59,14 +60,14 @@ export const Contact = () => {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2 pt-2">
-              <a href="https://github.com/Sarvesh8521" target="_blank" rel="noreferrer" className="btn-icon">
+            <div className="flex flex-col gap-2 pt-2 lg:flex-row lg:flex-wrap">
+              <a href="https://github.com/Sarvesh8521" target="_blank" rel="noreferrer" className="btn-icon min-h-11 w-full justify-center lg:w-auto">
                 <Github className="h-4 w-4" /> GitHub
               </a>
-              <a href="https://www.linkedin.com/in/sarvesh-singh-964510173/" target="_blank" rel="noreferrer" className="btn-icon">
+              <a href="https://www.linkedin.com/in/sarvesh-singh-964510173/" target="_blank" rel="noreferrer" className="btn-icon min-h-11 w-full justify-center lg:w-auto">
                 <Linkedin className="h-4 w-4" /> LinkedIn
               </a>
-              <a href={resumeHref} target="_blank" rel="noreferrer" className="btn-primary">
+              <a href={resumeHref} target="_blank" rel="noreferrer" className="btn-primary min-h-11 w-full justify-center lg:w-auto">
                 <FileText className="h-4 w-4" /> Download Resume
               </a>
             </div>
@@ -85,9 +86,9 @@ export const Contact = () => {
               <label className="mono text-xs text-muted-foreground">{">"} message</label>
               <Textarea rows={5} required value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="mt-1 bg-background border-border resize-none" />
             </div>
-            <button type="submit" disabled={sending} className="btn-primary w-full justify-center disabled:opacity-60">
+            <Button type="submit" disabled={sending} className="btn-primary min-h-11 w-full justify-center disabled:opacity-60">
               <Send className="h-4 w-4" /> {sending ? "sending..." : "send_message()"}
-            </button>
+            </Button>
           </form>
         </div>
       </div>

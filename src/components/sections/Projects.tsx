@@ -68,9 +68,9 @@ export const Projects = () => (
               <div className="mt-5 flex flex-wrap gap-2" aria-label="Technology stack">
                 {project.stack.map((tag) => <span key={tag} className="tech-chip">{tag}</span>)}
               </div>
-              <div className="mt-auto flex flex-wrap items-center gap-2 pt-6">
-                <Button type="button" variant="ghost" size="sm" disabled className="min-h-10 font-mono text-xs">Live Demo · pending</Button>
-                <Button asChild variant="outline" size="sm" className="ml-auto min-h-10 font-mono">
+              <div className="mt-auto flex flex-col items-stretch gap-2 pt-6 lg:flex-row lg:items-center">
+                <Button type="button" variant="ghost" size="sm" disabled className="min-h-11 w-full font-mono text-xs lg:w-auto">Live Demo · pending</Button>
+                <Button asChild variant="outline" size="sm" className="min-h-11 w-full font-mono lg:ml-auto lg:w-auto">
                   <a href={project.url} target="_blank" rel="noreferrer"><Github aria-hidden="true" /> GitHub <ArrowUpRight aria-hidden="true" /></a>
                 </Button>
               </div>
@@ -79,7 +79,9 @@ export const Projects = () => (
         ))}
       </div>
       <div className="mt-8 text-center">
-        <a className="mono inline-flex min-h-11 items-center gap-2 text-sm text-primary underline-offset-4 hover:underline" href="https://github.com/Sarvesh8521" target="_blank" rel="noreferrer">Explore all repositories <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></a>
+        <Button asChild variant="ghost" className="mono min-h-11 w-full text-sm text-primary lg:w-auto">
+          <a href="https://github.com/Sarvesh8521" target="_blank" rel="noreferrer">Explore all repositories <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></a>
+        </Button>
       </div>
     </div>
   </section>

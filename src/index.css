@@ -127,9 +127,9 @@
   .project-visual { @apply relative flex min-h-40 flex-col justify-between overflow-hidden border border-border p-4; background: hsl(var(--background)); }
   .project-visual::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(hsl(var(--grid-color)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--grid-color)) 1px, transparent 1px); background-size: 18px 18px; opacity: .7; mask-image: linear-gradient(to bottom, black, transparent); }
   .project-visual-label, .project-visual-diagram, .project-visual-note { @apply relative z-10; }
-  .project-visual-label { @apply flex items-center gap-2 text-[10px] text-muted-foreground; }
+  .project-visual-label { @apply flex items-center gap-2 text-[11px] text-muted-foreground; }
   .project-visual-diagram { @apply break-words text-center text-xs text-primary; }
-  .project-visual-note { @apply self-end text-[9px] text-muted-foreground; }
+  .project-visual-note { @apply self-end text-[11px] text-muted-foreground; }
   .terminal-window { @apply border border-border bg-card/70; box-shadow: 0 0 0 1px hsl(var(--primary) / .06) inset; }
   .terminal-window-bar { @apply flex items-center gap-1.5 border-b border-border px-3 py-2; }
   .terminal-window-bar > span:not(.mono) { @apply h-2 w-2 rounded-full bg-muted; }
@@ -139,9 +139,14 @@
   .nav-scroll::-webkit-scrollbar { display: none; }
 
   .nav-link {
-    @apply text-sm text-muted-foreground hover:text-foreground transition-colors;
+    @apply inline-flex min-h-11 shrink-0 items-center px-1 text-sm text-muted-foreground transition-colors hover:text-foreground;
     font-family: 'JetBrains Mono', monospace;
   }
+
+  .tech-chip { font-size: 0.75rem; }
+  .proof-badge { font-size: 0.6875rem; }
+  .project-visual-note { font-size: 0.6875rem; }
+  .project-visual-label { font-size: 0.6875rem; }
 
   .btn-icon {
     @apply inline-flex items-center gap-2 px-4 py-2.5 rounded-md border text-sm transition-all;
