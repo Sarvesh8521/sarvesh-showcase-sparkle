@@ -2,3 +2,5 @@
 - [x] Polish hero background, 200ms card hover, and restrained section reveals with reduced-motion support.
 - [x] Replace the downloadable resume and refresh portfolio facts from the newly shared PDFs.
 - [x] Verify the current build, live preview, and the resume download target.
+- [x] Add a pen-traced SVG role animation, draggable responsive portrait with expression variants, and subtle pointer-parallax skill marks.
+- [ ] Verify the interactions, mobile presentation, reduced-motion behavior, and current preview diagnostics.
