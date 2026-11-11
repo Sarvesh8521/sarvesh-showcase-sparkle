@@ -1,6 +1,8 @@
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { Button } from "@/components/ui/button";
 import { Download, Github, Linkedin, ArrowDownRight } from "lucide-react";
+import { HandwrittenRole } from "@/components/sections/HandwrittenRole";
+import { HeroPortrait } from "@/components/sections/HeroPortrait";
 
 const RESUME_FALLBACK = "/resume-upload.pdf";
 
@@ -18,6 +20,7 @@ export const Hero = () => {
           <h1 id="hero-title" className="terminal-title text-5xl font-bold leading-[1.08] sm:text-6xl md:text-7xl">
             Sarvesh Singh<span aria-hidden="true" className="terminal-caret">_</span>
           </h1>
+          <HandwrittenRole />
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             Software Engineer building Python backend services, document intelligence, and production RAG systems.
           </p>
@@ -41,10 +44,10 @@ export const Hero = () => {
             </a>
           </div>
         </div>
-        <div className="hidden md:block" aria-hidden="true">
-          <div className="terminal-window w-64">
+        <div className="hero-portrait-column mt-10 md:mt-0">
+          <HeroPortrait imageUrl={settings?.profile_image_url ?? null} />
+          <div className="terminal-window mx-auto mt-4 w-64 max-w-full">
             <div className="terminal-window-bar"><span /><span /><span /><span className="mono ml-auto text-xs text-muted-foreground">python</span></div>
-            {settings?.profile_image_url && <img src={settings.profile_image_url} alt="Sarvesh Singh" loading="lazy" className="h-52 w-full object-cover" />}
             <pre className="mono overflow-hidden p-5 text-sm leading-7 text-muted-foreground"><code><span className="accent-text">class</span> BackendEngineer:{"\n"}  focus = ["reliability",{"\n"}    "observability", "delivery"]{"\n"}{"\n"}<span className="accent-text">print</span>("ship with care")</code></pre>
           </div>
         </div>
